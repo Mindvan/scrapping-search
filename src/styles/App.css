@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /***********************/
 /**********************/
 * {
@@ -94,6 +95,7 @@ ul {
   overflow-y: auto;
   height: 100%;
   padding-right: 2rem;
+  width: 100%;
 }
 .list-item {
   position: relative;
@@ -105,14 +107,30 @@ ul {
   overflow: hidden;
   transition: all 0.3s ease;
 }
-.list-item__source {
+.list-item__meta {
   display: flex;
   font-size: 10pt;
+}
+.list-item__meta > * + *::before {
+  content: " | "; /* устанавливаем вертикальную линию между элементами */
+  margin: 0 5px; /* добавляем отступы справа и слева от линии */
+}
+.list-item__content {
+  display: grid;
+  grid-template-columns: 2fr 0.5fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "a c" "b c";
+}
+.list-item__source {
+  display: flex;
+  align-items: center;
   column-gap: 0.5rem;
 }
 .list-item__icon {
-  width: 15px;
-  height: 15px;
+  width: 1em;
+  height: 1em;
+  margin-bottom: 2.5px;
 }
 .list-item__title {
   font-family: "AkkuratLL", sans-serif;
@@ -124,6 +142,7 @@ ul {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  grid-area: a;
 }
 .list-item__paragraph {
   font-family: "AkkuratLL", sans-serif;
@@ -132,6 +151,14 @@ ul {
   font-size: 1.2vw;
   line-height: 1.2vw;
   color: #838383;
+  grid-area: b;
+}
+.list-item__image {
+  width: 70%;
+  height: auto;
+  margin-left: auto;
+  margin-right: 0;
+  grid-area: c;
 }
 .list-item:hover {
   border: 1.5px solid #00bbff;
@@ -141,7 +168,7 @@ ul {
 .list-item:after {
   content: "";
   position: absolute;
-  bottom: 10px;
+  bottom: 0;
   left: 0;
   height: 70%;
   width: 100%;
@@ -175,7 +202,7 @@ ul {
   transition: all 0.3s ease;
 }
 
-img {
+.nav__logo {
   width: auto;
   height: 5vh;
 }
@@ -237,16 +264,30 @@ img {
   margin: 0 auto;
   overflow-y: auto;
 }
-.feature__input {
-  flex-grow: 1;
-  display: table-cell;
-  width: 100%;
-  height: 3vw;
-  background-color: #131313;
-  border: 0;
+.feature-list label {
+  display: inline-block;
+  white-space: nowrap;
+}
+.feature-list label span {
+  vertical-align: middle;
+  margin-left: 1vh;
   color: white;
-  font-size: 14pt;
-  padding-left: 15px;
+  transition: all 0.3s ease;
+}
+.feature-list label span:hover {
+  color: #00bbff;
+  transition: all 0.3s ease;
+}
+.feature-list input {
+  vertical-align: middle;
+  position: relative;
+  top: -1.5px;
+}
+.feature-item {
+  display: flex;
+}
+.feature__input[type=checkbox] {
+  accent-color: #00bbff;
 }
 .feature__options {
   width: 50%;

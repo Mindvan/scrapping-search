@@ -4,6 +4,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 const Search = (props) => {
     const [query, setQuery] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleInputChange = (event) => {
         setQuery(event.target.value);
@@ -11,14 +12,19 @@ const Search = (props) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setIsLoading(true);
         const response = await fetch(`/search?q=${query}`, {
             headers: {
                 'Content-Type': 'application/json'
             }
         });
+
         console.log(response);
+        setIsLoading(false);
         const results = await response.json();
         console.log(results);
+        // после получения данных из сервера, вызываем функцию setData и передайте туда полученный результат
+        props.setData(results);
     };
 
     return (
@@ -32,6 +38,7 @@ const Search = (props) => {
             <button type="submit" className='search__icon'>
                 <FontAwesomeIcon size="2x" icon={faMagnifyingGlass} inverse/>
             </button>
+            {isLoading && <p>Поиск...</p>}
         </form>
     );
 };

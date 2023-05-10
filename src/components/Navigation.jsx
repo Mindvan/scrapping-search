@@ -14,7 +14,7 @@ const Navigation = (props) => {
     return (
         <header className='nav'>
             <div className='nav-content'>
-                <img src={logo} alt='nav__logo'/>
+                <img src={logo} className='nav__logo' alt='website logo'/>
                 <ul className='nav-list'>
                     <li className='nav-list__option' onClick={handleMainClick}>
                         Main

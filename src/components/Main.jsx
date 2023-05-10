@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Search from './Search';
 import List from './List';
 import Pagination from './Pagination';
 
 const Main = () => {
+    // состояние, которое содержит данные, возвращаемые из сервера
+    const [data, setData] = useState([]);
+
     return (
         <div className='container'>
-            <Search/>
-            <List/>
+            <Search setData={setData}/>
+            <List data={data}/>
             <Pagination/>
         </div>
     );

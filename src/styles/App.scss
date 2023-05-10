@@ -111,6 +111,7 @@ ul {
   overflow-y: auto;
   height: 100%;
   padding-right: 2rem;
+  width: 100%;
 
   &-item {
     position: relative;
@@ -123,15 +124,39 @@ ul {
     overflow: hidden;
     transition: all 0.3s ease;
 
-    &__source {
+    &__meta {
       display: flex;
       font-size: 10pt;
+
+      > * + *::before {
+        content: " | "; /* устанавливаем вертикальную линию между элементами */
+        margin: 0 5px; /* добавляем отступы справа и слева от линии */
+      }
+    }
+
+    &__content {
+      display: grid;
+      grid-template-columns: 2fr 0.5fr;
+      grid-template-rows: 1fr;
+      gap: 0px 0px;
+      grid-template-areas:
+              "a c"
+              "b c";
+    }
+
+    &__source {
+      display: flex;
+      align-items: center;
       column-gap: 0.5rem;
     }
 
     &__icon {
-      width: 15px;
-      height: 15px;
+      width: 1em;
+      height: 1em;
+      margin-bottom: 2.5px;
+    }
+
+    &__website {
     }
 
     &__title {
@@ -144,6 +169,7 @@ ul {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      grid-area: a;
     }
 
     &__paragraph {
@@ -153,6 +179,15 @@ ul {
       font-size: 1.2vw;
       line-height: 1.2vw;
       color: #838383;
+      grid-area: b;
+    }
+
+    &__image {
+      width: 70%;
+      height: auto;
+      margin-left: auto;
+      margin-right: 0;
+      grid-area: c;
     }
 
     &:hover {
@@ -164,7 +199,7 @@ ul {
     &:after {
       content: "";
       position: absolute;
-      bottom: 10px;
+      bottom: 0;
       left: 0;
       height: 70%;
       width: 100%;
@@ -202,7 +237,7 @@ ul {
   }
 }
 
-img {
+.nav__logo {
   width: auto;
   height: 5vh;
 }
@@ -269,18 +304,49 @@ img {
     width: 100%;
     margin: 0 auto;
     overflow-y: auto;
+
+    label {
+      display: inline-block;
+      white-space: nowrap;
+
+      span {
+        vertical-align: middle;
+        margin-left: 1vh;
+        color: $color_1;
+        transition: all 0.3s ease;
+
+        &:hover {
+          color: $color_2;
+          transition: all 0.3s ease;
+        }
+      }
+    }
+
+    input {
+      vertical-align: middle;
+      position: relative;
+      top: -1.5px;
+    }
+  }
+
+  &-item {
+    display: flex;
   }
 
   &__input {
-    flex-grow: 1;
-    display: table-cell;
-    width: 100%;
-    height: 3vw;
-    background-color: $background-color_1;
-    border: 0;
-    color: $color_1;
-    font-size: 14pt;
-    padding-left: 15px;
+
+    &[type=checkbox]{
+      accent-color:  $color_2;
+    }
+    //flex-grow: 1;
+    //display: table-cell;
+    //width: 100%;
+    //height: 3vw;
+    //background-color: $background-color_1;
+    //border: 0;
+    //color: $color_1;
+    //font-size: 14pt;
+    //padding-left: 15px;
   }
 
   &__options {
