@@ -11,6 +11,10 @@ const Navigation = (props) => {
         props.onNavigationClick('featured');
     }
 
+    function handleLimitsClick() {
+        props.setModal(true);
+    }
+
     return (
         <header className='nav'>
             <div className='nav-content'>
@@ -22,7 +26,7 @@ const Navigation = (props) => {
                     <li className='nav-list__option' onClick={handleFeaturedClick}>
                         Featured websites
                     </li>
-                    <li className='nav-list__option'>
+                    <li className='nav-list__option' onClick={handleLimitsClick}>
                         Limit
                     </li>
                 </ul>

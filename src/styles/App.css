@@ -261,6 +261,7 @@ ul {
   flex-direction: column;
   row-gap: 0.5rem;
   width: 100%;
+  flex-grow: 1;
   margin: 0 auto;
   overflow-y: auto;
 }
@@ -308,6 +309,74 @@ ul {
   transition: all 0.3s ease;
 }
 .feature__options > *:hover {
+  background-color: white;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+.my-modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: none;
+  background: rgba(0, 0, 0, 0.5);
+}
+.my-modal.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+.my-modal-close {
+  position: absolute;
+  top: 1vw;
+  right: 1vw;
+  cursor: pointer;
+}
+
+.my-modal-content {
+  padding: 15px;
+  position: relative;
+  background: #202020;
+  border-radius: 16px;
+  width: 50vw;
+  color: white;
+  height: 35vh;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.my-modal-content > label {
+  font-size: 2vw;
+}
+.my-modal-content > input {
+  width: 10vw;
+  height: 4vh;
+}
+.my-modal-content > input[type=number] {
+  font-size: 1.5vw;
+  background-color: #131313;
+  border: 0;
+  color: white;
+  padding-left: 15px;
+}
+.my-modal-content > input[type=submit] {
+  cursor: pointer;
+  width: 50%;
+  height: 3vw;
+  background-color: transparent;
+  border: 1.5px solid white;
+  border-radius: 2rem;
+  color: white;
+  font-size: 1vw;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.my-modal-content > input[type=submit]:hover {
   background-color: white;
   color: black;
   transition: all 0.3s ease;
