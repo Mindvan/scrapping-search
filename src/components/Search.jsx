@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
+import { io } from 'socket.io-client';
+const socket = io('http://localhost:3000', {
+    transports: ['websocket']
+});
+
+
 const Search = (props) => {
     const [query, setQuery] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    //const [message, setMessage] = useState('');
 
     const handleInputChange = (event) => {
         setQuery(event.target.value);
@@ -12,18 +18,26 @@ const Search = (props) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setIsLoading(true);
+        props.setData([]); // очистка данных
+        props.setMessage('Запрос отправлен, ожидайте...');
+
+        const ws = new WebSocket('ws://localhost:8080');
+        ws.onopen = () => {
+            console.log('WebSocket client connected');
+        };
+        ws.onmessage = (event) => {
+            console.log(event.data);
+            props.setMessage(event.data);
+        };
+
         const response = await fetch(`/search?q=${query}`, {
             headers: {
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
         });
 
-        console.log(response);
-        setIsLoading(false);
         const results = await response.json();
         console.log(results);
-        // после получения данных из сервера, вызываем функцию setData и передайте туда полученный результат
         props.setData(results);
     };
 
@@ -38,9 +52,9 @@ const Search = (props) => {
             <button type="submit" className='search__icon'>
                 <FontAwesomeIcon size="2x" icon={faMagnifyingGlass} inverse/>
             </button>
-            {isLoading && <p>Поиск...</p>}
         </form>
     );
 };
 
 export default Search;
+

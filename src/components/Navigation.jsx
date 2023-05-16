@@ -3,16 +3,16 @@ import logo from '../icons/scraper-search.png';
 
 const Navigation = (props) => {
 
-    function handleMainClick() {
-        props.onNavigationClick('main');
+    function handleAddClick() {
+        props.setModalAdd(true);
     }
 
     function handleFeaturedClick() {
-        props.onNavigationClick('featured');
+        props.setModalFeatured(true);
     }
 
     function handleLimitsClick() {
-        props.setModal(true);
+        props.setModalLimits(true);
     }
 
     return (
@@ -20,8 +20,8 @@ const Navigation = (props) => {
             <div className='nav-content'>
                 <img src={logo} className='nav__logo' alt='website logo'/>
                 <ul className='nav-list'>
-                    <li className='nav-list__option' onClick={handleMainClick}>
-                        Main
+                    <li className='nav-list__option' onClick={handleAddClick}>
+                        Add
                     </li>
                     <li className='nav-list__option' onClick={handleFeaturedClick}>
                         Featured websites

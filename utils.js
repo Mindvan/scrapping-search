@@ -9,7 +9,10 @@ function getTimestamp(dateString) {
     return date.getTime();
 }
 
+const encodeQuery = (query) => {return encodeURIComponent(query);};
+
 module.exports = {
     getTimestamp,
     parseDate,
+    encodeQuery,
 };
