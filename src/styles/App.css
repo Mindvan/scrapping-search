@@ -102,7 +102,7 @@ ul {
   color: white;
   background-color: #2a2a2a;
   border: 1.5px solid #3a3a3a;
-  min-height: 15vh;
+  height: 15vh;
   padding: 15px;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -472,6 +472,31 @@ input[type=checkbox], input[type=text], input[type=number] {
 
 .add-selectors {
   height: 80vh;
+}
+
+.sort {
+  display: flex;
+  column-gap: 1vw;
+  position: relative;
+  margin-right: auto;
+}
+.sort__button {
+  cursor: pointer;
+  padding: 0 15px;
+  height: 3vw;
+  background-color: transparent;
+  border: 1.5px solid white;
+  border-radius: 2rem;
+  color: white;
+  font-size: 1vw;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.sort__button:hover, .sort__button-active {
+  background-color: white;
+  color: black;
+  transition: all 0.3s ease;
 }
 
 /*# sourceMappingURL=App.css.map */

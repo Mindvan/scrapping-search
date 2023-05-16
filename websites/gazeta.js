@@ -17,11 +17,11 @@ async function scrapGazeta(page, context, query) {
         const newPage = await context.newPage();
         await newPage.goto(link);
         await newPage.waitForSelector('.b_article-text');
-        const datetime = await newPage.$eval('.time[itemprop="datePublished"]', el => el.dateTime);
-        const date = parseDate(datetime);
+        const dateISO = await newPage.$eval('.time[itemprop="datePublished"]', el => el.dateTime);
+        const date = parseDate(dateISO);
         const text = await newPage.$$eval('.b_article-text p',
             para => para.map(p => p.textContent.trim()));
-        return { index: index + allResults.length + 1, domain: 'Газета.ru', favicon, title, text, img, link, date};}
+        return { index: index + allResults.length + 1, domain: 'Газета.ru', favicon, title, text, img, link, date, dateISO};}
     );
 
     return await Promise.all(promises);

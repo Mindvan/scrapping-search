@@ -19,9 +19,9 @@ async function scrapRIA(page, context, query) {
         await newPage.waitForSelector('.article__block');
         const text = await newPage.$$eval('.article__block[data-type="text"] > .article__text',
             para => para.map(p => p.textContent.trim()));
-        const datetime = await newPage.$eval('.endless__item', el => el.getAttribute('data-published'));
-        const date = parseDate(datetime);
-        return { index: index + allResults.length + 1, domain: 'РИА Новости', favicon, title, text, img, link, date };
+        const dateISO = await newPage.$eval('.endless__item', el => el.getAttribute('data-published'));
+        const date = parseDate(dateISO);
+        return { index: index + allResults.length + 1, domain: 'РИА Новости', favicon, title, text, img, link, date, dateISO};
     });
 
     return await Promise.all(promises);

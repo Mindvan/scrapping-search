@@ -15,17 +15,16 @@ async function scrapRTVi(page, context, query) {
         const title = await item.$eval('.arch-title', el => el.textContent.trim());
         console.log(title);
         const img = await item.$eval('.archive-image', el => el.src);
-
         const newPage = await context.newPage();
         await newPage.goto(link);
         await newPage.waitForSelector('.article-text-inner');
-        const datetime = await newPage.$eval('meta[property="article:published_time"]', el => el.content);
-        const date = parseDate(datetime);
+        const dateISO = await newPage.$eval('meta[property="article:published_time"]', el => el.content);
+        const date = parseDate(dateISO);
         const text = await newPage.$$eval('.article-text-inner p',
             para => para.map(p => p.textContent.trim()));
 
         console.log(text);
-        return { index: index + allResults.length + 1, domain: 'RTVi', favicon, title, text, img, link, date};}
+        return { index: index + allResults.length + 1, domain: 'RTVi', favicon, title, text, img, link, date, dateISO};}
     );
 
     return await Promise.all(promises);

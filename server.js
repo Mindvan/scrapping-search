@@ -169,6 +169,11 @@ app.post('/save-websites', (req, res) => {
     res.json({ message: 'Done' });
 });
 
+app.get('/sort', (req, res) => {
+    res.send(JSON.stringify(allResults));
+    res.json({ message: 'Done' });
+});
+
 app.listen(4000, () => {
     console.log('Server is running on port 4000');
 });

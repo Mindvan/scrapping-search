@@ -18,8 +18,8 @@ async function scrapKommersant(page, context, query) {
         const newPage = await context.newPage();
         await newPage.goto(link);
         await newPage.waitForSelector('.doc_header__publish_time');
-        const datetime = await newPage.$eval('.doc_header__publish_time', el => el.dateTime);
-        const date = parseDate(datetime);
+        const dateISO = await newPage.$eval('.doc_header__publish_time', el => el.dateTime);
+        const date = parseDate(dateISO);
 
         const img = await newPage.$eval('.doc_media__media', el => el.src)
             .catch(() => undefined);
@@ -27,7 +27,7 @@ async function scrapKommersant(page, context, query) {
         const text = await newPage.$$eval('.doc__text',
             para => para.slice(0, 2).map(p => p.textContent.trim()));
 
-        return { index: index + allResults.length + 1, domain: 'Коммерсант', favicon, title, text, img, link, date };
+        return { index: index + allResults.length + 1, domain: 'Коммерсант', favicon, title, text, img, link, date, dateISO};
     });
 
     return await Promise.all(promises);
