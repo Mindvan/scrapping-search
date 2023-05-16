@@ -226,6 +226,20 @@ ul {
     color: $color_1;
     cursor: pointer;
   }
+
+  &__active {
+    cursor: auto;
+    pointer-events: none;
+    color: $color_2;
+    border: 1.5px solid $color_2;
+  }
+
+  &__disabled {
+    cursor: auto;
+    pointer-events: none;
+    opacity: 0.5;
+    color: gray;
+  }
 }
 
 .fa-2x {

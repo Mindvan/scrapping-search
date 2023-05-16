@@ -192,6 +192,18 @@ ul {
   color: white;
   cursor: pointer;
 }
+.pagination__active {
+  cursor: auto;
+  pointer-events: none;
+  color: #00bbff;
+  border: 1.5px solid #00bbff;
+}
+.pagination__disabled {
+  cursor: auto;
+  pointer-events: none;
+  opacity: 0.5;
+  color: gray;
+}
 
 .fa-2x {
   font-size: 1.5em;

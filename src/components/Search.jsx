@@ -39,6 +39,9 @@ const Search = (props) => {
         const results = await response.json();
         console.log(results);
         props.setData(results);
+
+        console.log(props.data);
+        //props.setData(results);
     };
 
     return (

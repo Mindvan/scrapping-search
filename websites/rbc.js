@@ -6,7 +6,7 @@ const {allResults, limit} = require("../start.js");
 async function scrapRBC(page, context, query) {
     const urlRBC = `https://www.rbc.ru/search/?query=${encodeQuery(query)}`;
 
-    await page.goto(urlRBC);
+    await page.goto(urlRBC, await page.waitForTimeout(5 * 1000));
     await page.waitForSelector('.search-item__link');
     const items = await page.$$('.search-item__link');
 
