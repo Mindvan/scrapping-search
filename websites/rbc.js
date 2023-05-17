@@ -1,13 +1,12 @@
 const {parseDate} = require("../utils");
 const {encodeQuery} = require("../utils.js");
-const {allResults, limit} = require("../start.js");
+const {allResults} = require("../start.js");
 
-
-async function scrapRBC(page, context, query) {
+async function scrapRBC(page, context, query, limit) {
     const urlRBC = `https://www.rbc.ru/search/?query=${encodeQuery(query)}`;
 
     console.log('1');
-    await page.goto(urlRBC, await page.waitForTimeout(5 * 1000));
+    await page.goto(urlRBC, { timeout: 0 });
     console.log('2');
     await page.waitForSelector('.search-item__link');
     console.log('1');
@@ -36,7 +35,7 @@ async function scrapRBC(page, context, query) {
         console.log('11');
         const newPage = await context.newPage();
         console.log('12');
-        await newPage.goto(link);
+        await newPage.goto(link, { timeout: 0 });
         console.log('13');
         await newPage.waitForSelector('.article__text');
         console.log('14');
@@ -53,6 +52,4 @@ async function scrapRBC(page, context, query) {
     return await Promise.all(promises);
 }
 
-module.exports = {
-    scrapRBC,
-};
+module.exports = {scrapRBC};

@@ -1,12 +1,13 @@
 const {parseDate} = require("../utils");
 const {encodeQuery} = require("../utils.js");
-const {allResults, limit} = require("../start.js");
+const {allResults} = require("../start.js");
 
+async function scrapKommersant(page, context, query, limit) {
+    console.log('ressss: ' + limit);
 
-async function scrapKommersant(page, context, query) {
     const urlKomm = `https://www.kommersant.ru/search/results?search_query=${encodeQuery(query)}&sort_type=0`;
 
-    await page.goto(urlKomm);
+    await page.goto(urlKomm, { timeout: 0 });
     await page.waitForSelector('.uho__text');
     const kommItems = await page.$$('.uho__text');
 
@@ -16,7 +17,7 @@ async function scrapKommersant(page, context, query) {
         const title = await item.$eval('h2.uho__name.rubric_lenta__item_name', el => el.textContent.trim());
 
         const newPage = await context.newPage();
-        await newPage.goto(link);
+        await newPage.goto(link, { timeout: 0 });
         await newPage.waitForSelector('.doc_header__publish_time');
         const dateISO = await newPage.$eval('.doc_header__publish_time', el => el.dateTime);
         const date = parseDate(dateISO);
@@ -33,6 +34,4 @@ async function scrapKommersant(page, context, query) {
     return await Promise.all(promises);
 }
 
-module.exports = {
-    scrapKommersant,
-};
+module.exports = {scrapKommersant};

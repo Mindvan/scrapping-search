@@ -1,11 +1,11 @@
 const {parseDate} = require("../utils");
 const {encodeQuery} = require("../utils.js");
-const {allResults, limit} = require("../start.js");
+const {allResults} = require("../start.js");
 
-async function scrapRTVi(page, context, query) {
+async function scrapRTVi(page, context, query, limit) {
     const urlRTVi = `https://rtvi.com/?s=${encodeQuery(query)}`;
 
-    await page.goto(urlRTVi);
+    await page.goto(urlRTVi, { timeout: 0 });
     await page.waitForSelector('.arch-block');
     const rtvitems = await page.$$('.arch-block');
     const promises = rtvitems.slice(0, limit).map(async (item, index) => {
@@ -16,7 +16,7 @@ async function scrapRTVi(page, context, query) {
         console.log(title);
         const img = await item.$eval('.archive-image', el => el.src);
         const newPage = await context.newPage();
-        await newPage.goto(link);
+        await newPage.goto(link, { timeout: 0 });
         await newPage.waitForSelector('.article-text-inner');
         const dateISO = await newPage.$eval('meta[property="article:published_time"]', el => el.content);
         const date = parseDate(dateISO);
@@ -30,6 +30,4 @@ async function scrapRTVi(page, context, query) {
     return await Promise.all(promises);
 }
 
-module.exports = {
-    scrapRTVi,
-};
+module.exports = {scrapRTVi};

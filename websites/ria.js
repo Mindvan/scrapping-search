@@ -1,12 +1,12 @@
 const {parseDate} = require("../utils");
 const {encodeQuery} = require("../utils.js");
-const {allResults, limit} = require("../start.js");
+const {allResults} = require("../start.js");
 
 
-async function scrapRIA(page, context, query) {
+async function scrapRIA(page, context, query, limit) {
     const urlRIA = `https://ria.ru/search/?query=${encodeQuery(query)}`;
 
-    await page.goto(urlRIA);
+    await page.goto(urlRIA, { timeout: 0 });
     await page.waitForSelector('.list-item');
     const riaItems = await page.$$('.list-item');
     const promises = riaItems.slice(0, limit).map(async (item, index) => {
@@ -15,7 +15,7 @@ async function scrapRIA(page, context, query) {
         const title = await item.$eval('a.list-item__title', el => el.textContent.trim());
         const img = await item.$eval('a.list-item__image > picture > img', el => el.src);
         const newPage = await context.newPage();
-        await newPage.goto(link);
+        await newPage.goto(link, { timeout: 0 });
         await newPage.waitForSelector('.article__block');
         const text = await newPage.$$eval('.article__block[data-type="text"] > .article__text',
             para => para.map(p => p.textContent.trim()));
@@ -27,6 +27,4 @@ async function scrapRIA(page, context, query) {
     return await Promise.all(promises);
 }
 
-module.exports = {
-    scrapRIA,
-};
+module.exports = {scrapRIA};

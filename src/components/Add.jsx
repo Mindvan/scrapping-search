@@ -10,7 +10,9 @@ const Add = ({visibility, setVisibility}) => {
         link: '',
         article: '',
         paragraph: '',
-        img: ''
+        img: '',
+        date: '',
+        dateISO: ''
     });
 
     const handleClose = () => {
@@ -37,8 +39,12 @@ const Add = ({visibility, setVisibility}) => {
             name: '',
             query: '',
             title: '',
+            link: '',
+            article: '',
             paragraph: '',
-            img: ''
+            img: '',
+            date: '',
+            dateISO: ''
         });
     };
 
@@ -56,72 +62,89 @@ const Add = ({visibility, setVisibility}) => {
                 <h2>Add new website</h2>
                 <div className='add-list'>
                     <label className='add-item'>
-                        <span>Website Name</span>
+                        <span>Название веб-сайта</span>
                         <input
-                            type="text"
-                            name="name"
-                            onChange={handleInputChange}
-                            value={selectors.name}
-                            className='feature__input'
+                               type="text"
+                               name="name"
+                            //value='https://lenta.ru/search?query='
+                               value={selectors.name}
+                               onChange={handleInputChange}
+                               className='feature__input'
                         />
                     </label>
                     <label className='add-item'>
-                        <span>Website search query</span>
+                        <span>Запрос query</span>
                         <input required
                             type="text"
                             name="query"
+                               //value='https://lenta.ru/search?query='
                             value={selectors.query}
                             onChange={handleInputChange}
                             className='feature__input'
                         />
                     </label>
                     <label className='add-item'>
-                        <span>Paragraphs of the article</span>
+                        <span>Контейнер статьи</span>
                         <input required
                                type="text"
                                name="article"
+                               //value='.search-results__item'
                                value={selectors.article}
                                onChange={handleInputChange}
                                className='feature__input'
                         />
                     </label>
                     <label className='add-item'>
-                        <span>Link to the article</span>
+                        <span>Ссылка на статью</span>
                         <input required
                             type="text"
                             name="link"
+                               //value='.search-results__item > a'
                             value={selectors.link}
                             onChange={handleInputChange}
                             className='feature__input'
                         />
                     </label>
                     <label className='add-item'>
-                        <span>Article title</span>
+                        <span>Заголовок статьи</span>
                         <input required
                             type="text"
                             name="title"
+                               //value='.card-full-news__title'
                             value={selectors.title}
                             onChange={handleInputChange}
                             className='feature__input'
                         />
                     </label>
                     <label className='add-item'>
-                        <span>Paragraphs of the article</span>
+                        <span>Абзац статьи</span>
                         <input required
                             type="text"
                             name="paragraph"
+                             //  value='.topic-body__content-text'
                             value={selectors.paragraph}
                             onChange={handleInputChange}
                             className='feature__input'
                         />
                     </label>
                     <label className='add-item'>
-                        <span>Image of the article (if any)</span>
+                        <span>Изображение статьи (при наличии)</span>
                         <input
                             type="text"
                             name="img"
                             onChange={handleInputChange}
+                            //value='.picture__image'
                             value={selectors.img}
+                            className='feature__input'
+                        />
+                    </label>
+                    <label className='add-item'>
+                        <span>Дата статьи (при наличии)</span>
+                        <input
+                            type="text"
+                            name="dateISO"
+                            onChange={handleInputChange}
+                            value={selectors.dateISO}
                             className='feature__input'
                         />
                     </label>

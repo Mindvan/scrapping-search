@@ -1,6 +1,8 @@
 var allResults = [];
 var selectors = {};
-var limit = 8;
+let limit = 8;
+
+var custom = {};
 
 var websites = {
     'РБК': true,
@@ -15,4 +17,5 @@ module.exports = {
     selectors,
     limit,
     websites,
+    custom
 };
