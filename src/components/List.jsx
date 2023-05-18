@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Article from './Article';
 import {ScaleLoader} from "react-spinners";
 

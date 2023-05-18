@@ -37,8 +37,7 @@ const Article = (props) => {
                     </div>
                     <img
                         src = {props.article.img ? props.article.img : def}
-                        // src={props.article.img}
-                        alt = 'article-image'
+                        alt = 'article'
                         className='list-item__image'/>
                 </div>
             </div>
