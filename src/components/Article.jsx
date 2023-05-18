@@ -26,13 +26,15 @@ const Article = (props) => {
                     </div>
                 </div>
                 <div className="list-item__content">
-                    <div className='list-item__title'>
-                        {props.article.title}
+                    <div className="list-item__info">
+                        <div className='list-item__title'>
+                            {props.article.title}
+                        </div>
+                        <p className='list-item__paragraph'>
+                            {props.article.text}
+                            {/*{props.article.text + '…'}*/}
+                        </p>
                     </div>
-                    <p className='list-item__paragraph'>
-                        {props.article.text}
-                        {/*{props.article.text + '…'}*/}
-                    </p>
                     <img
                         src = {props.article.img ? props.article.img : def}
                         // src={props.article.img}

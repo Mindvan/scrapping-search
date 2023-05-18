@@ -132,6 +132,9 @@ ul {
   height: 1em;
   margin-bottom: 2.5px;
 }
+.list-item__info {
+  overflow: hidden;
+}
 .list-item__title {
   font-family: "AkkuratLL", sans-serif;
   font-weight: 800;
@@ -320,7 +323,6 @@ ul {
   color: black;
   transition: all 0.3s ease;
 }
-
 .popup {
   position: fixed;
   top: 0;

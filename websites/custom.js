@@ -4,8 +4,8 @@ const {allResults, limit} = require("../start.js");
 // const {selectors} = require("../server.js");
 
 async function scrapCustom(page, context, query, limit, selectors) {
-    if (!selectors)
-        return;
+    console.log('12:');
+    console.log(selectors);
 
     console.log(selectors);
     const url = `${selectors.query}${encodeQuery(query)}`;
@@ -56,12 +56,12 @@ async function scrapCustom(page, context, query, limit, selectors) {
         //     }
         // }
 
-       // console.log(dateISO);
-       //  const dateISO = selectors.dateISO.length
-       //      ? await newPage.$eval(`${selectors.dateISO}`, el => el.dateTime)
-       //      : (await page.$(`${selectors.dateISO}`) ? await newPage.$eval(`${selectors.dateISO}`, el => el.content) : null);
+        // console.log(dateISO);
+        //  const dateISO = selectors.dateISO.length
+        //      ? await newPage.$eval(`${selectors.dateISO}`, el => el.dateTime)
+        //      : (await page.$(`${selectors.dateISO}`) ? await newPage.$eval(`${selectors.dateISO}`, el => el.content) : null);
 
-       //  const dateISO = selectors.dateISO ? await newPage.$eval(`${selectors.dateISO}`, el => el.content) : null;
+        //  const dateISO = selectors.dateISO ? await newPage.$eval(`${selectors.dateISO}`, el => el.content) : null;
 
         const dateISO = selectors.dateISO ?
             await newPage.evaluate(selector => {

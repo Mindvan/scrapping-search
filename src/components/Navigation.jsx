@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../icons/scraper-search.png';
+import logo from '../icons/scraper-search.svg';
 
 const Navigation = (props) => {
 

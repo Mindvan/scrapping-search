@@ -14,9 +14,11 @@ async function scrapRBC(page, context, query, limit) {
 
     console.log('4');
     const filteredItems = await Promise.all(items.map(async (item) => {
-        const hasProDomain = await item.evaluate((el) => el.href.includes('pro.rbc.ru'));
+        const hasProDomain = await item.evaluate((el) => el.href.includes('pro.rbc.ru') || el.href.includes('rbc.ru/life') || el.href.includes('tv.rbc'));
         return hasProDomain ? null : item;
     }));
+
+
 
     console.log('5');
     const filteredNonNullItems = filteredItems.filter((item) => item !== null);
@@ -31,17 +33,46 @@ async function scrapRBC(page, context, query, limit) {
         console.log('9');
         const title = await item.$eval('.search-item__title', el => el.textContent.trim().replace(/\n/g, ' '));
         console.log('10');
-        const img = await item.$eval('.search-item__image-block img', el => el.src);
+        let img;
+        try {
+            img = await item.$eval('.search-item__image-block img', el => el.src);
+        } catch (error) {
+            console.log('Image not found for item:', error);
+            img = undefined;
+        }
+
+        console.log('img');
+        console.log(img);
+
         console.log('11');
         const newPage = await context.newPage();
         console.log('12');
         await newPage.goto(link, { timeout: 0 });
         console.log('13');
+
+        var chapter = 'main';
+
+        if (link.includes('rbc.ru/life')) chapter = 'life';
+
+        // link.includes('rbc.ru/life')
+        //     ? await newPage.waitForSelector('.paragraph')
+        //     : await newPage.waitForSelector('.article__text');
+        // console.log('14');
+
         await newPage.waitForSelector('.article__text');
-        console.log('14');
+
+        // let dateISO;
+        // if (link.includes('style.rbc.ru')) {
+        //     dateISO = await newPage.$eval('.article__date', (element) => element.getAttribute('content'));
+        // } else if (chapter === 'life') {
+        //     dateISO = await newPage.$eval('meta[itemprop="datePublished"]', (element) => element.getAttribute('content'));
+        // } else {
+        //     dateISO = await newPage.$eval('.article__header__date', (element) => element.getAttribute('content'));
+        // }
         const dateISO = link.includes('style.rbc.ru')
             ? await newPage.$eval('.article__date', (element) => element.getAttribute('content'))
-            : await newPage.$eval('.article__header__date', (element) => element.getAttribute('content'));
+            : await newPage.$eval('.article__header__date', (element) => element.getAttribute('content'))
+
         const date = await parseDate(dateISO);
         console.log('15');
         //datetime === null ? date = parseDate(await datetime.getAttribute('content')) : date = parseDate(await datetime.getAttribute('content'));

@@ -40,6 +40,8 @@ const Main = () => {
             )
             : [];
 
+    console.log(page);
+
     const handlePageChange = (pageNumber) => {
         setPage(pageNumber);
     };
@@ -64,26 +66,25 @@ const Main = () => {
 
     return (
         <div className='container'>
-            <Search setData={setData} setMessage={setMessage}/>
-
-                    <Sort onSortChange={handleSortChange} setSortDirection={setSortDirection} setSortBy={setSortBy}/>
-                    <List data={currentItems} message={message} sortDirection={sortDirection}/>
-                    <Pagination
-                        itemsPerPage={itemsPerPage}
-                        totalItems={data.length} // передаем общее количество элементов
-                        currentPage={page}
-                        onPageChange={handlePageChange}
-                    />
-            {/*{currentItems.length > 0 && (*/}
-            {/*    <Sort onSortChange={handleSortChange} setSortDirection={setSortDirection} setSortBy={setSortBy}/>)}*/}
-            {/*<List data={currentItems} message={message} ssortDirection={sortDirection}/>*/}
-            {/*{currentItems.length > 0 && (*/}
+            <Search setData={setData} setMessage={setMessage} setPage={setPage}/>
+            {/*<Sort onSortChange={handleSortChange} setSortDirection={setSortDirection} setSortBy={setSortBy}/>*/}
+            {/*<List data={currentItems} message={message} sortDirection={sortDirection}/>*/}
             {/*<Pagination*/}
             {/*    itemsPerPage={itemsPerPage}*/}
             {/*    totalItems={data.length} // передаем общее количество элементов*/}
             {/*    currentPage={page}*/}
             {/*    onPageChange={handlePageChange}*/}
-            {/*/>)}*/}
+            {/*/>*/}
+            {currentItems.length > 0 && (
+                <Sort onSortChange={handleSortChange} setSortDirection={setSortDirection} setSortBy={setSortBy}/>)}
+            <List data={currentItems} message={message} ssortDirection={sortDirection}/>
+            {currentItems.length > 0 && (
+            <Pagination
+                itemsPerPage={itemsPerPage}
+                totalItems={data.length} // передаем общее количество элементов
+                currentPage={page}
+                onPageChange={handlePageChange}
+            />)}
         </div>
     );
 };

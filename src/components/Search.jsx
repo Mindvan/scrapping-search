@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
-import { io } from 'socket.io-client';
-const socket = io('http://localhost:3000', {
-    transports: ['websocket']
-});
+// import { io } from 'socket.io-client';
+// const socket = io('http://localhost:3000', {
+//     transports: ['websocket']
+// });
 
 
 const Search = (props) => {
@@ -20,6 +20,7 @@ const Search = (props) => {
         event.preventDefault();
         props.setData([]); // очистка данных
         props.setMessage('Запрос отправлен, ожидайте...');
+        props.setPage(1);
 
         const ws = new WebSocket('ws://localhost:8080');
         ws.onopen = () => {
@@ -41,7 +42,6 @@ const Search = (props) => {
         props.setData(results);
 
         console.log(props.data);
-        //props.setData(results);
     };
 
     return (
